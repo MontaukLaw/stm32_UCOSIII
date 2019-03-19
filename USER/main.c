@@ -198,6 +198,7 @@ void led1_task(void *p_arg)
 //浮点测试任务
 void float_task(void *p_arg)
 {
+    OS_ERR err;
 	CPU_SR_ALLOC();
 	static float float_num=0.01;
 	while(1)
@@ -206,6 +207,7 @@ void float_task(void *p_arg)
 		OS_CRITICAL_ENTER();	//进入临界区
 		printf("float_num的值为: %.4f\r\n",float_num);
 		OS_CRITICAL_EXIT();		//退出临界区
-		delay_ms(500);			//延时500ms
+		//delay_ms(500);			//延时500ms
+        OSTimeDlyHMSM(0,0,1,0,OS_OPT_TIME_HMSM_STRICT,&err); //延时1s
 	}
 }
